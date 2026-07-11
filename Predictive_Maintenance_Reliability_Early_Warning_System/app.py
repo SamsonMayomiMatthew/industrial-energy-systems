@@ -17,7 +17,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🏭 Dangote Cement Plant Reliability Center")
+st.title("🏭 Cement Plant Reliability Center")
 st.markdown("### Real-Time Predictive Maintenance & Early Warning Dashboard")
 st.markdown("---")
 
