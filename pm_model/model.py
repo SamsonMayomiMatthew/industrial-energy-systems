@@ -3,10 +3,10 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
-filepath = "Rollers Predictive Maintenance.xlsx"
 def train_predictive_engine(filepath):
     """Loads dataset and trains the polynomial regression model."""
-    df = pd.read_excel(filepath, engine='openpyxl')
+    # Using openpyxl ensures cloud servers unzip modern excel archives correctly
+    df = pd.read_excel(filepath, engine="openpyxl")
     
     # Train only on the active degradation phase (Time_step >= 3)
     df_train = df[df['Time_step'] >= 3]
@@ -28,7 +28,6 @@ def calculate_rul(current_time, current_torque, c0, c1, c2, critical_limit=30.0)
     if current_torque >= critical_limit:
         return 0.0
     
-    # Quadratic equation coefficients: c2*t^2 + c1*t + (c0 - critical_limit) = 0
     a = c2
     b = c1
     c = c0 - critical_limit

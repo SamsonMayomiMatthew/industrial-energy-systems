@@ -1,5 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import os
+import pandas as pd
 from model import train_predictive_engine, calculate_rul
 
 # ==========================================
@@ -29,21 +31,47 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# CACHED DATA LOADING
+# CACHED DATA LOADING WITH AUTOMATED SELF-HEALING
 # ==========================================
 @st.cache_data
 def load_model_and_data(filepath):
-    """Wrapper function to cache the data load and model training."""
+    """Wrapper function to cache the data load and model training.
+    Includes an automatic self-healing routine if the Excel file is corrupted or missing."""
+    excel_is_broken = False
+    
+    # 1. Check if the Excel file physically exists
+    if not os.path.exists(filepath):
+        excel_is_broken = True
+    else:
+        # 2. Test if it is a true binary Excel/Zip file by trying to read 1 row
+        try:
+            pd.read_excel(filepath, nrows=1, engine="openpyxl")
+        except Exception:
+            excel_is_broken = True
+            
+    # 3. If it is missing or corrupted, automatically convert your good CSV into a valid Excel file
+    if excel_is_broken:
+        if os.path.exists('dataset.csv'):
+            df_csv = pd.read_csv('dataset.csv')
+            # This creates a structurally pristine, zipped XML binary workbook natively on the server
+            df_csv.to_excel(filepath, index=False)
+        else:
+            raise FileNotFoundError(
+                "The Excel workbook is invalid/missing, and 'dataset.csv' "
+                "could not be found in the repository to automatically reconstruct it."
+            )
+            
     return train_predictive_engine(filepath)
 
 # Load and train
 try:
-    model, poly, df = load_model_and_data('https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/pm_model/data.xlsx')
+    model, poly, df = load_model_and_data('Rollers Predictive Maintenance.xlsx')
     c0 = model.intercept_
     c1 = model.coef_[0]
     c2 = model.coef_[1]
 except Exception as e:
-    st.error(f"Error loading dataset: {e}. Please ensure the file is in the same directory.")
+    st.error(f"🚨 **Engine Error Loading Dataset:** {e}")
+    st.info("💡 **Troubleshooting Tip:** Ensure that `dataset.csv` and `requirements.txt` are pushed to your GitHub repository.")
     st.stop()
 
 # ==========================================
@@ -188,7 +216,7 @@ with info_col:
     st.subheader("⚙️ Digital Twin Engineering Parameters")
     st.markdown("The predictive engine uses a mathematical **digital twin model** calibrated directly from ANSYS structural load simulations of DCP support rollers.")
     
-    st.markdown(f"""
+    st.markdown(rf"""
     **Trained Regression Parameters:**
     * **Baseline Load Intercept ($c_0$):** `{c0:.4f} Nm`
     * **Linear Growth Factor ($c_1$):** `{c1:.4f}`
