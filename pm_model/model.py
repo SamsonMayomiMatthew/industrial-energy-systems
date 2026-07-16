@@ -6,7 +6,7 @@ from sklearn.preprocessing import PolynomialFeatures
 filepath = "https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/pm_model/Rollers%20Predictive%20Maintenance.xlsx"
 def train_predictive_engine(filepath):
     """Loads dataset and trains the polynomial regression model."""
-    df = pd.read_excel(filepath)
+    df = pd.read_excel(filepath, engine='openpyxl')
     
     # Train only on the active degradation phase (Time_step >= 3)
     df_train = df[df['Time_step'] >= 3]
