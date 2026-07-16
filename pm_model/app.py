@@ -37,9 +37,8 @@ def load_model_and_data(filepath):
     return train_predictive_engine(filepath)
 
 # Load and train
-data_ = "https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/pm_model/dataset.csv"
 try:
-    model, poly, df = load_model_and_data(data_)
+    model, poly, df = load_model_and_data('Rollers Predictive Maintenance.xlsx')
     c0 = model.intercept_
     c1 = model.coef_[0]
     c2 = model.coef_[1]
