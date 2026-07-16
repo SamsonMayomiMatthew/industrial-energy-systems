@@ -38,7 +38,7 @@ def load_model_and_data(filepath):
 
 # Load and train
 try:
-    model, poly, df = load_model_and_data('Rollers Predictive Maintenance.xlsx')
+    model, poly, df = load_model_and_data('dataset.xlsx')
     c0 = model.intercept_
     c1 = model.coef_[0]
     c2 = model.coef_[1]
