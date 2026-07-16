@@ -38,7 +38,7 @@ def load_model_and_data(filepath):
 
 # Load and train
 try:
-    model, poly, df = load_model_and_data('dataset.csv')
+    model, poly, df = load_model_and_data('https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/Hybrid_PM/dataset.csv')
     c0 = model.intercept_
     c1 = model.coef_[0]
     c2 = model.coef_[1]
