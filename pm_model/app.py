@@ -51,8 +51,8 @@ def load_model_and_data(filepath):
             
     # 3. If it is missing or corrupted, automatically convert your good CSV into a valid Excel file
     if excel_is_broken:
-        if os.path.exists('dataset.csv'):
-            df_csv = pd.read_csv('dataset.csv')
+        if os.path.exists('https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/pm_model/dataset.csv'):
+            df_csv = pd.read_csv('https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/pm_model/dataset.csv')
             # This creates a structurally pristine, zipped XML binary workbook natively on the server
             df_csv.to_excel(filepath, index=False)
         else:
