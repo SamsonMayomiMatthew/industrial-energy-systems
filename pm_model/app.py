@@ -37,7 +37,7 @@ def load_model_and_data(filepath):
     return train_predictive_engine(filepath)
 
 # Load and train
-data_ = "dataset.csv"
+filepath = "https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/pm_model/dataset.csv"
 try:
     model, poly, df = load_model_and_data(data_)
     c0 = model.intercept_
