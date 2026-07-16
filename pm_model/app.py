@@ -38,7 +38,7 @@ def load_model_and_data(filepath):
 
 # Load and train
 try:
-    model, poly, df = load_model_and_data('https://github.com/SamsonMayomiMatthew/industrial-energy-systems/blob/main/pm_model/data.xlsx')
+    model, poly, df = load_model_and_data('Rollers Predictive Maintenance.xlsx')
     c0 = model.intercept_
     c1 = model.coef_[0]
     c2 = model.coef_[1]
@@ -188,7 +188,7 @@ with info_col:
     st.subheader("⚙️ Digital Twin Engineering Parameters")
     st.markdown("The predictive engine uses a mathematical **digital twin model** calibrated directly from ANSYS structural load simulations of DCP support rollers.")
     
-    st.markdown(rf"""
+    st.markdown(f"""
     **Trained Regression Parameters:**
     * **Baseline Load Intercept ($c_0$):** `{c0:.4f} Nm`
     * **Linear Growth Factor ($c_1$):** `{c1:.4f}`
