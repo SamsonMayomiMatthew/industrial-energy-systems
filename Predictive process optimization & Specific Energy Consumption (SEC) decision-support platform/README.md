@@ -47,3 +47,8 @@ The **Industrial Process Efficiency Engine** replaces fixed schedules with a phy
 ┌─────────────────────────┐
 │ Streamlit UI / Visuals  │ ──► Dynamic Trajectory Plotly Charts & Prescriptive Advice
 └─────────────────────────┘
+
+👤 Author & Acknowledgments
+Developer: Samson Mayomi Matthew
+
+Program: 3MTT NextGen Fellowship (Nigeria)
