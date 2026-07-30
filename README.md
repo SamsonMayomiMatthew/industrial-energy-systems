@@ -1,4 +1,4 @@
-# Energy Systems Portfolio
+# Industrial-Energy Systems Portfolio
 
 A collection of energy systems and industrial optimization projects demonstrating the application of data analytics, modeling, simulation, and optimization techniques to solve real-world engineering challenges.
 
